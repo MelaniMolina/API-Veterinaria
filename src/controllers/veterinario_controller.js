@@ -88,9 +88,15 @@ const confirmEmail = async (req,res)=>{
 
 
 
-const listarVeterinarios = (req,res)=>{
-    res.status(200).json({res:'lista de veterinarios registrados'})
-}
+const listarVeterinarios = async (req, res) => {
+    try {
+      const veterinarios = await Veterinario.find();
+      res.status(200).json(veterinarios);
+    } catch (error) {
+      res.status(500).json({ error: 'Error al obtener la lista de veterinarios' });
+    }
+
+  };
 
 
 const detalleVeterinario = async(req,res)=>{
